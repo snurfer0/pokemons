@@ -1,0 +1,12 @@
+
+@font-face {
+    font-family: 'Sofia Rough Black Three';
+    src: url(https://db.onlinewebfonts.com/c/f57396517be5751bccaab142b05f5291?family=Sofia+Rough+Black+Three);
+}
+
+body {
+    font-family: 'Sofia Rough Black Three', sans-serif;
+}
+
+@import './pagination';
+@import './pokemon';

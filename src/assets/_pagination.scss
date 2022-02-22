@@ -1,0 +1,21 @@
+// Variables
+$theme-color: #367aac;
+
+.pagination-container {
+	margin: auto;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+
+	button {
+		margin: 20px;
+		font: inherit;
+		cursor: pointer;
+		background: none;
+		border: none;
+		outline: inherit;
+		color: $theme-color;
+		font-weight: bold;
+		font-size: 14px;
+	}
+}
