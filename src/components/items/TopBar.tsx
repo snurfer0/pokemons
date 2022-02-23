@@ -1,20 +1,46 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { ApplicationState } from '../../store/index';
-import { Page } from '../../store/pagination/types';
-import { PokemonActionTypes } from '../../store/pokemons/types';
-import { PaginationActionTypes } from '../../store/pagination/types';
+import { Page, PaginationActionTypes } from '../../store/pagination/types';
+import { Pokemon, PokemonActionTypes } from '../../store/pokemons/types';
 
 interface PropsFromState {
 	page?: Page;
+	pokemons?: Pokemon[];
+	pokemonsLoaded?: boolean;
 }
 
-type Props = PropsFromState
+type Props = PropsFromState;
 
-const TopBar: React.FC<Props> = ({ page }) => {
+const TopBar: React.FC<Props> = ({ page, pokemons, pokemonsLoaded }) => {
 	const dispatch = useDispatch();
+
+	// useEffect(() => {
+	// 	if (pokemons) {
+	// 		let sorted = localStorage.getItem('sort');
+
+	// 		if (sorted === 'az') {
+	// 			console.log('sorting b az');
+	// 			dispatch({
+	// 				type: PokemonActionTypes.SORT_ALPHABETICALLY,
+	// 			});
+	// 		} else if (sorted === 'height') {
+	// 			console.log('sorting b h');
+	// 			dispatch({
+	// 				type: PokemonActionTypes.SORT_BY_HEIGHT,
+	// 			});
+	// 		} else if (sorted === 'weight') {
+	// 			console.log('sorting b w');
+	// 			dispatch({
+	// 				type: PokemonActionTypes.SORT_BY_WEIGHT,
+	// 			});
+	// 		}
+	// 	}
+	// }, [pokemonsLoaded]);
+
+	if(!pokemons) return null
 
 	return (
 		<div className='topbar-container'>
@@ -59,7 +85,12 @@ const TopBar: React.FC<Props> = ({ page }) => {
 			<div className='search-input-container'>
 				<FontAwesomeIcon className='icon' icon={faSearch} />
 				<input
-					onChange={(e) => dispatch({ type: PokemonActionTypes.FILTER_DATA, payload: e.target.value})}
+					onChange={(e) =>
+						dispatch({
+							type: PokemonActionTypes.FILTER_DATA,
+							payload: e.target.value,
+						})
+					}
 					id='search-teams-input'
 					type='text'
 					placeholder='Search Teams'
@@ -70,29 +101,32 @@ const TopBar: React.FC<Props> = ({ page }) => {
 				<div className='dropdown-text'>Sort Items</div>
 				<ul className='dropdown-content'>
 					<li
-						onClick={() =>
+						onClick={() => {
+							localStorage.setItem('sort', 'az');
 							dispatch({
 								type: PokemonActionTypes.SORT_ALPHABETICALLY,
-							})
-						}
+							});
+						}}
 					>
 						From A-Z
 					</li>
 					<li
-						onClick={() =>
+						onClick={() => {
+							localStorage.setItem('sort', 'height');
 							dispatch({
 								type: PokemonActionTypes.SORT_BY_HEIGHT,
-							})
-						}
+							});
+						}}
 					>
 						By Height
 					</li>
 					<li
-						onClick={() =>
+						onClick={() => {
+							localStorage.setItem('sort', 'weight');
 							dispatch({
 								type: PokemonActionTypes.SORT_BY_WEIGHT,
-							})
-						}
+							});
+						}}
 					>
 						By Weight
 					</li>
@@ -102,8 +136,10 @@ const TopBar: React.FC<Props> = ({ page }) => {
 	);
 };
 
-const mapStateToProps = ({ pagination }: ApplicationState) => {
+const mapStateToProps = ({ pagination, pokemons }: ApplicationState) => {
 	return {
+		pokemons: pokemons.data,
+		pokemonsLoaded: pokemons.loading,
 		page: pagination.data,
 	};
 };

@@ -55,6 +55,7 @@ $box-shadow: 4 7px 67px 5 $box-shadow-color;
 			border-radius: 3px;
 			box-shadow: 0 4px 8px $box-shadow-color;
 			width: 100%;
+			background-color: white;
 		}
 
 		.dropdown-text:after {
@@ -80,7 +81,7 @@ $box-shadow: 4 7px 67px 5 $box-shadow-color;
 
 		.dropdown-toggle {
 			font-size: 0;
-			z-index: 1;
+			z-index: 10;
 			cursor: pointer;
 			position: absolute;
 			top: 0;
@@ -108,7 +109,6 @@ $box-shadow: 4 7px 67px 5 $box-shadow-color;
 			top: 32px;
 			padding: 0;
 			margin: 0;
-			opacity: 0;
 			visibility: hidden;
 			border-radius: 3px;
 			text-indent: 10px;
@@ -131,7 +131,6 @@ $box-shadow: 4 7px 67px 5 $box-shadow-color;
 
 		.dropdown-content:hover,
 		.dropdown-toggle:focus ~ .dropdown-content {
-			opacity: 1;
 			visibility: visible;
 			top: 42px;
 		}

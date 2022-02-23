@@ -21,16 +21,19 @@ interface PageResponse {
 
 export const fetchPage: AppThunk =
 	(limit: number, offset: number) =>
-		async (dispatch: Dispatch): Promise<Action> => {
-		console.log('FP');
+	async (dispatch: Dispatch): Promise<Action> => {
 		try {
+			console.log('PaginationActionTypes.FETCH_REQUEST');
+			dispatch({
+				type: PaginationActionTypes.FETCH_REQUEST,
+			});
 			let response: AxiosResponse<PageResponse> =
 				await api.get<PageResponse>(
 					`/pokemon/?limit=${limit}&offset=${offset}`,
 				);
 
 			if (response.status === 200) {
-				console.log(response.data);
+				console.log('PaginationActionTypes.FETCH_SUCCESS');
 				return dispatch({
 					type: PaginationActionTypes.FETCH_SUCCESS,
 					payload: { limit: limit, offset: offset, ...response.data },

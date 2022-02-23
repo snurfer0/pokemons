@@ -1,32 +1,30 @@
-
 // Variables
 $theme-color: #367aac;
 $box-shadow-color: rgba(0, 0, 0, 0.2);
 $text-color: #797171;
 
-
 @font-face {
-    font-family: 'Sofia Rough Black Three';
-    src: url(https://db.onlinewebfonts.com/c/f57396517be5751bccaab142b05f5291?family=Sofia+Rough+Black+Three);
+	font-family: 'Sofia Rough Black Three';
+	src: url(https://db.onlinewebfonts.com/c/f57396517be5751bccaab142b05f5291?family=Sofia+Rough+Black+Three);
 }
 
 * {
-    font-family: 'Sofia Rough Black Three', sans-serif;
+	font-family: 'Sofia Rough Black Three', sans-serif;
 }
 
 #homepage-container {
-    position: relative;
-    border: solid rgb(201, 194, 194);
-    border-width: 1.5px;
-    border-radius: 5px;
-    margin: auto;
-    width: 70%;
-    display:flex;
-    justify-content: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
 }
 
+body {
+	margin: 0px;
+}
 
 @import './topBar';
 @import './pagination';
 @import './pokemonList';
 @import './pokemonDetail';
+@import './darkModeToggler';
+@import './darkMode';

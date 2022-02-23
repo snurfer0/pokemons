@@ -1,6 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Pokemon } from '../../store/pokemons/types';
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import {PokemonActionTypes} from '../../store/pokemons/types'
 
 interface Props {
 	pokemon: Pokemon;
@@ -9,6 +11,7 @@ interface Props {
 const PokemonItem: React.FC<Props> = ({ pokemon }) => {
 
 	const history = useHistory();
+	const dispatch = useDispatch();
 	
 	return (
 		<div className='pokemon-container'>
@@ -39,7 +42,10 @@ const PokemonItem: React.FC<Props> = ({ pokemon }) => {
 					</div>
 				</div>
 				<div className='pokemon-footer'>
-					<button className='see-details-button' onClick={() => history.push(`/pokemon/${pokemon.id}`) }>See Details</button>
+					<button className='see-details-button' onClick={() => {
+						dispatch({ type: PokemonActionTypes.SELECT_POKEMON, payload: pokemon.id});
+						history.push(`/pokemon/detail/`);
+					} }>See Details</button>
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,5 @@
+import { AnyAction, Reducer } from 'redux';
 import { PaginationActionTypes, PaginationState } from './types';
-import { AnyAction } from 'redux';
-import { Reducer } from 'redux';
 
 const initialState: PaginationState = {
 	data: {
@@ -13,7 +12,7 @@ const initialState: PaginationState = {
 		results: [],
 	},
 	errors: undefined,
-	loading: false,
+	loading: true,
 };
 
 const reducer: Reducer<PaginationState> = (
@@ -21,10 +20,10 @@ const reducer: Reducer<PaginationState> = (
 	action: AnyAction,
 ) => {
 	switch (action.type) {
-		case PaginationActionTypes.FETCH_REQUEST: {
+		case PaginationActionTypes.FETCH_REQUEST:
 			return { ...state, loading: true };
-		}
-		case PaginationActionTypes.FETCH_SUCCESS: {
+
+		case PaginationActionTypes.FETCH_SUCCESS:
 			return {
 				...state,
 				loading: false,
@@ -35,11 +34,11 @@ const reducer: Reducer<PaginationState> = (
 					),
 				},
 			};
-		}
-		case PaginationActionTypes.FETCH_ERROR: {
+
+		case PaginationActionTypes.FETCH_ERROR:
 			return { ...state, loading: false, errors: action.payload };
-		}
-		case PaginationActionTypes.SET_LIMIT: 
+
+		case PaginationActionTypes.SET_LIMIT:
 			return {
 				...state,
 				data: {
@@ -49,6 +48,7 @@ const reducer: Reducer<PaginationState> = (
 					totalPages: Math.round(state.data.count / action.payload),
 				},
 			};
+		
 		default: {
 			return state;
 		}

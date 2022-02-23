@@ -1,0 +1,54 @@
+.darkMode {
+	background-color: #1f374a;
+
+	.pokemon-container,
+	.props-container,
+	.prop {
+		background-color: #4b4343;
+
+		.name,
+		.label,
+		.value,
+		.see-details-button {
+			color: white !important;
+		}
+
+		button {
+			color: white;
+		}
+	}
+
+	.pagination-container {
+		div {
+			color: white;
+		}
+		button:enabled {
+			color: white;
+		}
+	}
+
+	.topbar-container {
+		.search-input-container {
+			.icon {
+				color: rgb(179, 166, 166);
+			}
+		}
+		.dropdown {
+			.dropdown-text {
+				background-color: #4b4343;
+                font-weight: 100px;
+			}
+
+			.dropdown-content li:hover {
+				color: white;
+				font-weight: normal;
+				text-decoration: underline;
+			}
+		}
+
+		.dropdown-content,
+		input {
+			background-color: #4b4343;
+		}
+	}
+}

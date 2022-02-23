@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -19,44 +19,37 @@ interface PropsFromState {
 	loading: boolean;
 	pokemons: Pokemon[];
 	errors?: string;
+	darkMode: boolean;
 }
 
 type Props = PropsFromState & PropsFromDispatch;
 
 const HomePage: React.FC<Props> = ({
+	darkMode,
 	pokemons,
 	loading,
-	errors,
-	fetchPokemons,
 }) => {
-
 	if (loading) return <Loading />;
 
 	return (
-		<div id='homepage-container'>
+		<div id='homepage-container' className={darkMode ? 'darkMode' : ''}>
 			<div className='content-wrapper'>
 				<TopBar />
-				<Pagination fetchPokemons={fetchPokemons} />
+				<Pagination />
 				<PokemonList pokemons={pokemons} />
 			</div>
 		</div>
 	);
 };
 
-const mapStateToProps = ({ pokemons }: ApplicationState) => {
+const mapStateToProps = ({ pokemons, darkMode }: ApplicationState) => {
 	return {
+		darkMode: darkMode.status,
 		pokemons: pokemons.data,
 		loading: pokemons.loading,
 		errors: pokemons.errors,
 	};
 };
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
-	return {
-		fetchPokemons: (pageResults: PageResult[]) => {
-			dispatch(fetchPokemons(pageResults));
-		},
-	};
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, null)(HomePage);

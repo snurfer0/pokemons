@@ -6,6 +6,7 @@ const initialState: PokemonState = {
 	initialData: [],
 	data: [],
 	errors: undefined,
+	selectedPokemon: null,
 	loading: false,
 };
 
@@ -14,33 +15,37 @@ const reducer: Reducer<PokemonState> = (
 	action: AnyAction,
 ) => {
 	switch (action.type) {
-		case PokemonActionTypes.FETCH_REQUEST: {
+		case PokemonActionTypes.FETCH_REQUEST:
 			return { ...state, loading: true };
-		}
-		case PokemonActionTypes.FETCH_SUCCESS: {
+
+		case PokemonActionTypes.FETCH_SUCCESS:
 			return {
 				...state,
 				loading: false,
 				data: action.payload,
 				initialData: action.payload,
 			};
-		}
-		case PokemonActionTypes.FETCH_ERROR: {
-			return { ...state, loading: false, errors: action.payload };
-		}
-		case PokemonActionTypes.FILTER_DATA: {
+
+		case PokemonActionTypes.SELECT_POKEMON:
 			return {
 				...state,
-				data: state.initialData.filter(
-					(p: Pokemon) =>
-						p.name
-							.toLowerCase()
-							.includes(action.payload.toLowerCase()),
+				selectedPokemon: state.data.find(
+					(pokemon: Pokemon) => pokemon.id === action.payload,
 				),
 			};
-		}
+		
+		case PokemonActionTypes.FETCH_ERROR:
+			return { ...state, loading: false, errors: action.payload };
+
+		case PokemonActionTypes.FILTER_DATA:
+			return {
+				...state,
+				data: state.initialData.filter((p: Pokemon) =>
+					p.name.toLowerCase().includes(action.payload.toLowerCase()),
+				),
+			};
+
 		case PokemonActionTypes.SORT_ALPHABETICALLY:
-			console.log('state data sort alphabetically', state.data);
 			return {
 				...state,
 				data: _.orderBy(
