@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { ApplicationState } from '../../store/index';
+import { PageResult } from '../../store/pagination/types';
 import { fetchPokemons } from '../../store/pokemons/action';
 import { Pokemon } from '../../store/pokemons/types';
+import Loading from '../items/Loading';
 import Pagination from '../items/Pagination';
 import PokemonList from '../items/PokemonList';
-import {PageResult} from '../../store/pagination/types'
-import Loading from '../items/Loading';
+import TopBar from '../items/TopBar';
 
 interface PropsFromDispatch {
 	fetchPokemons: (pageResults: PageResult[]) => any;
@@ -28,16 +29,16 @@ const HomePage: React.FC<Props> = ({
 	errors,
 	fetchPokemons,
 }) => {
-	useEffect(() => {
-		console.log("Homepage pokemons", pokemons);
-	}, []);
 
-	if(loading) return <Loading/>
+	if (loading) return <Loading />;
 
 	return (
-		<div>
-			<Pagination fetchPokemons={fetchPokemons} />
-			<PokemonList pokemons={pokemons} />
+		<div id='homepage-container'>
+			<div className='content-wrapper'>
+				<TopBar />
+				<Pagination fetchPokemons={fetchPokemons} />
+				<PokemonList pokemons={pokemons} />
+			</div>
 		</div>
 	);
 };

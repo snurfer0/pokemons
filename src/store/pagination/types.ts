@@ -2,6 +2,7 @@ export type PageResult = { name: string; url: string };
 
 export interface Page {
 	count: number;
+	totalPages: number;
 	limit: number;
 	offset: number;
 	next: string | null;
@@ -10,8 +11,7 @@ export interface Page {
 }
 
 export enum PaginationActionTypes {
-	FETCH_NEXT_PAGE = '@@pagination/FETCH_NEXT_PAGE',
-	FETCH_PREV_PAGE = '@@pagination/FETCH_PREV_PAGE',
+	SET_LIMIT = '@@pagination/SET_LIMIT',
 	FETCH_REQUEST = '@@pagination/FETCH_REQUEST',
 	FETCH_SUCCESS = '@@pagination/FETCH_SUCCESS',
 	FETCH_ERROR = '@@pagination/FETCH_ERROR',

@@ -21,7 +21,8 @@ interface PageResponse {
 
 export const fetchPage: AppThunk =
 	(limit: number, offset: number) =>
-	async (dispatch: Dispatch): Promise<Action> => {
+		async (dispatch: Dispatch): Promise<Action> => {
+		console.log('FP');
 		try {
 			let response: AxiosResponse<PageResponse> =
 				await api.get<PageResponse>(

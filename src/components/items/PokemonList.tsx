@@ -7,8 +7,6 @@ interface Props {
 }
 
 const PokemonList: React.FC<Props> = ({ pokemons }) => {
-	if (!pokemons.length) return null;
-
 	return (
 		<div className='pokemon-list-container'>
 			{pokemons.map((pokemon: Pokemon) => (

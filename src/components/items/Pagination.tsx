@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { AnyAction, Dispatch } from 'redux';
+import React, { useEffect, useState, useMemo } from 'react';
+import { connect } from 'react-redux';
+import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { ApplicationState } from '../../store/index';
 import { fetchPage } from '../../store/pagination/action';
@@ -26,21 +26,21 @@ const Pagination: React.FC<Props> = ({
 	fetchPage,
 	fetchPokemons,
 }) => {
-
 	const [currentPage, setCurrentPage] = useState<number>(1);
 
 	useEffect(() => {
-		setCurrentPage((page.offset / page.limit) + 1)
+		setCurrentPage(page.offset / page.limit + 1);
 	}, [page]);
-
 
 	useEffect(() => {
 		fetchPage(page.limit, page.offset);
-	}, []);
+	}, [page.limit, page.offset, fetchPage]);
 
 	useEffect(() => {
-		fetchPokemons(page.results);
-	}, [page, fetchPokemons]);
+		if (page.results) {
+			fetchPokemons(page.results);
+		}
+	}, [page.results]);
 
 	return (
 		<div className='pagination-container'>
@@ -50,11 +50,11 @@ const Pagination: React.FC<Props> = ({
 			>
 				Previous page
 			</button>
-			<p>
-				{currentPage}/{page.count}
-			</p>
+			<div>
+				{currentPage}&nbsp;/&nbsp;{page.totalPages}
+			</div>
 			<button
-				disabled={currentPage === page.count ? true : false}
+				disabled={currentPage === page.totalPages ? true : false}
 				onClick={() => fetchPage(page.limit, page.offset + page.limit)}
 			>
 				Next Page

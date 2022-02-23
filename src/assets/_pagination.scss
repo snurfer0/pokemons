@@ -1,11 +1,23 @@
 // Variables
 $theme-color: #367aac;
+$text-color: #797171;
 
 .pagination-container {
-	margin: auto;
 	width: 50%;
 	display: flex;
 	justify-content: center;
+	margin: 20px auto 20px;
+
+	div {
+		text-align: center;
+		vertical-align: middle;
+		color: $text-color;
+		letter-spacing: 1px;
+		font-size: 13px;
+		line-height: 60px;
+		font-weight: bold;
+		
+	}
 
 	button {
 		margin: 20px;
@@ -17,5 +29,10 @@ $theme-color: #367aac;
 		color: $theme-color;
 		font-weight: bold;
 		font-size: 14px;
+	}
+
+	button:disabled,
+	button[disabled] {
+		color: $text-color;
 	}
 }

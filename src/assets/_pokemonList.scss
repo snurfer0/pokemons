@@ -8,20 +8,17 @@ $pokenom-name-color: #5a5252;
 	display: grid;
 	grid-template-columns: 250px 250px 250px 250px;
 	grid-template-rows: auto;
-	margin: auto;
-	width: 50%;
 }
 
 .pokemon-container {
-	margin-top: 50px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 20px;
 	padding: 20px;
-	margin: 10px;
 	box-shadow: 0 4px 8px 0 $box-shadow-color;
 	transition: 0.3s;
+	margin: 10px;
 
 	.pokemon {
 		img {
@@ -37,7 +34,7 @@ $pokenom-name-color: #5a5252;
 			text-transform: uppercase;
 			font-weight: bold;
 			margin: auto;
-			width: 50%;
+			width: 100%;
 			padding: 10px;
 			color: $pokenom-name-color;
 			text-align: center;
@@ -60,10 +57,13 @@ $pokenom-name-color: #5a5252;
 					font-size: 11px;
 
 					p {
-						margin-top: 0px;
 						text-align: right;
 						text-transform: capitalize;
 					}
+				}
+
+				.abilities {
+					height: 40px;
 				}
 			}
 		}

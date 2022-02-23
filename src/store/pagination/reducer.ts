@@ -5,6 +5,7 @@ import { Reducer } from 'redux';
 const initialState: PaginationState = {
 	data: {
 		count: 0,
+		totalPages: 0,
 		limit: 20,
 		offset: 0,
 		next: null,
@@ -24,11 +25,30 @@ const reducer: Reducer<PaginationState> = (
 			return { ...state, loading: true };
 		}
 		case PaginationActionTypes.FETCH_SUCCESS: {
-			return { ...state, loading: false, data: action.payload };
+			return {
+				...state,
+				loading: false,
+				data: {
+					...action.payload,
+					totalPages: Math.round(
+						action.payload.count / state.data.limit,
+					),
+				},
+			};
 		}
 		case PaginationActionTypes.FETCH_ERROR: {
 			return { ...state, loading: false, errors: action.payload };
 		}
+		case PaginationActionTypes.SET_LIMIT: 
+			return {
+				...state,
+				data: {
+					...state.data,
+					offset: 0,
+					limit: action.payload,
+					totalPages: Math.round(state.data.count / action.payload),
+				},
+			};
 		default: {
 			return state;
 		}
