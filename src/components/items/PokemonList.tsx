@@ -11,7 +11,7 @@ interface Props {
 }
 
 const PokemonList: React.FC<Props> = ({ pokemons, isFetchingPokemons }) => {
-	if (true) return <Loading />;
+	if (isFetchingPokemons) return <Loading />;
 	return (
 		<div className='pokemon-list-container'>
 			{pokemons.map((pokemon: Pokemon) => (
