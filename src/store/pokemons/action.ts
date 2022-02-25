@@ -18,9 +18,9 @@ export const fetchPokemons: AppThunk =
 	async (dispatch: Dispatch): Promise<Action> => {
 		try {
 			console.log('PokemonActionTypes.FETCH_REQUEST');
-			// dispatch({
-			// 	type: PokemonActionTypes.FETCH_REQUEST,
-			// });
+			dispatch({
+				type: PokemonActionTypes.FETCH_REQUEST,
+			});
 			let promises: AxiosResponse<Pokemon>[] = [];
 
 			for (let result of pageResults) {

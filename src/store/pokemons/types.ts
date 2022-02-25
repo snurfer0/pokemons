@@ -54,5 +54,6 @@ export interface PokemonState {
 	readonly initialData: Pokemon[];
 	readonly data: Pokemon[];
 	readonly selectedPokemon?: Pokemon | null;
+	readonly relatedPokemons?: Pokemon[] | null;
 	readonly errors?: string;
 }

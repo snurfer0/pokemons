@@ -7,6 +7,7 @@ const initialState: PokemonState = {
 	data: [],
 	errors: undefined,
 	selectedPokemon: null,
+	relatedPokemons: null,
 	loading: false,
 };
 
@@ -27,11 +28,16 @@ const reducer: Reducer<PokemonState> = (
 			};
 
 		case PokemonActionTypes.SELECT_POKEMON:
+			let selectedPokemon = state.data.find(
+				(pokemon: Pokemon) => pokemon.id === action.payload,
+			);
+			let shuffledPokemons = state.data.sort(
+				() => 0.5 - Math.random(),
+			);
 			return {
 				...state,
-				selectedPokemon: state.data.find(
-					(pokemon: Pokemon) => pokemon.id === action.payload,
-				),
+				selectedPokemon: selectedPokemon,
+				relatedPokemons: shuffledPokemons.slice(0, 3),
 			};
 		
 		case PokemonActionTypes.FETCH_ERROR:

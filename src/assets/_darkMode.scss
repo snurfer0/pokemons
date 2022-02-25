@@ -1,6 +1,10 @@
 .darkMode {
 	background-color: #1f374a;
 
+	body {
+		background-color: #1f374a;
+	}
+
 	.pokemon-container,
 	.props-container,
 	.prop {
@@ -36,7 +40,7 @@
 		.dropdown {
 			.dropdown-text {
 				background-color: #4b4343;
-                font-weight: 100px;
+				font-weight: 100px;
 			}
 
 			.dropdown-content li:hover {
@@ -49,6 +53,56 @@
 		.dropdown-content,
 		input {
 			background-color: #4b4343;
+		}
+	}
+
+	.tabs {
+		background-color: white;
+	}
+
+	.wrapper {
+		.pokemon {
+			&-name {
+				color: white;
+			}
+
+			&-props {
+				color: white;
+			}
+
+			.switch-wrapper {
+				color: white;
+			}
+
+			p {
+				color: white;
+			}
+		}
+
+		.tab {
+			color: white;
+			background-color: #4b4343;
+			border: 1px solid rgb(179, 166, 166);
+			border-radius: 10px;
+
+			&-content {
+				max-height: 0;
+				padding: 0 1em;
+				transition: all 0.35s;
+				font-size: 12px;
+			}
+		}
+
+		input:checked {
+			+ .tab-label {
+				&::after {
+					transform: rotate(90deg);
+				}
+			}
+			~ .tab-content {
+				max-height: 100vh;
+				padding: 1em;
+			}
 		}
 	}
 }

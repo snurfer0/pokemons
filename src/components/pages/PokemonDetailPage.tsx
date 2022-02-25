@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { ApplicationState } from '../../store/index';
 import {
 	Ability,
@@ -14,18 +14,27 @@ import {
 import DarkModeToggler from '../items/DarkModeToggler';
 import Dropdown from '../items/Dropdown';
 import Loading from '../items/Loading';
+import PokemonList from '../items/PokemonList';
 
 interface PropsFromState {
 	pokemon: Pokemon;
+	relatedPokemons: Pokemon[];
+	darkMode: boolean;
 }
 
-const PokemonDetailPage: React.FC<PropsFromState> = ({ pokemon }) => {
+const PokemonDetailPage: React.FC<PropsFromState> = ({
+	pokemon,
+	relatedPokemons,
+	darkMode,
+}) => {
 	const history = useHistory();
 
 	if (!pokemon) return <Loading />;
 
 	return (
-		<div className='pokemon-detail-container'>
+		<div
+			className={`pokemon-detail-container ${darkMode ? 'darkMode' : ''}`}
+		>
 			<div className='wrapper'>
 				<div className='pokemon'>
 					<button onClick={() => history.push('/')}>Back</button>
@@ -37,8 +46,9 @@ const PokemonDetailPage: React.FC<PropsFromState> = ({ pokemon }) => {
 					<div className='pokemon-props'>
 						Height: {pokemon.height} &nbsp; Weight: {pokemon.height}{' '}
 						&nbsp; Base experience: {pokemon.base_experience} &nbsp;
-						Default: {pokemon.is_default}  &nbsp; Order:{' '}
-						{pokemon.order} &nbsp; Species: {pokemon.species.name}
+						Default: {pokemon.is_default ? 'True' : 'False'} &nbsp;
+						Order: {pokemon.order} &nbsp; Species:{' '}
+						{pokemon.species.name}
 					</div>
 					<Dropdown
 						label={'Abilities'}
@@ -98,11 +108,9 @@ const PokemonDetailPage: React.FC<PropsFromState> = ({ pokemon }) => {
 						)}
 					/>
 
-					<div className="alike">
+					<div className='alike'>
 						<p>You might also like</p>
-						<div className="alike-pokemon-list">
-
-						</div>
+						<PokemonList pokemons={relatedPokemons} />
 					</div>
 				</div>
 			</div>
@@ -110,9 +118,11 @@ const PokemonDetailPage: React.FC<PropsFromState> = ({ pokemon }) => {
 	);
 };
 
-const mapStateToProps = ({ pokemons }: ApplicationState) => {
+const mapStateToProps = ({ pokemons, darkMode }: ApplicationState) => {
 	return {
 		pokemon: pokemons.selectedPokemon,
+		relatedPokemons: pokemons.relatedPokemons,
+		darkMode: darkMode.status,
 	};
 };
 

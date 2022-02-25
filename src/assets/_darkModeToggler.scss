@@ -2,7 +2,8 @@
 
 .switch-wrapper {
   position: absolute;
-  right: 26%;
+  right: 20%;
+  z-index: 1;
 
   span {
     font-size: 10px;
@@ -51,11 +52,11 @@
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #367AAC;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #367AAC;
 }
 
 input:checked + .slider:before {

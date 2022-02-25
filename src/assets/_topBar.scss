@@ -1,13 +1,8 @@
-// Variables
-$theme-color: #367aac;
-$box-shadow-color: rgba(0, 0, 0, 0.2);
-$text-color: #797171;
-$box-shadow: 4 7px 67px 5 $box-shadow-color;
-
 .topbar-container {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 25px;
+	width: 1000px;
 
 	.search-input-container {
 		width: 40%;
@@ -41,6 +36,7 @@ $box-shadow: 4 7px 67px 5 $box-shadow-color;
 		display: inline-block;
 		text-align: left;
 		width: 200px;
+		z-index: 10;
 
 		a {
 			text-decoration: none;

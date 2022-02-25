@@ -1,12 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AnyAction } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
 import { ApplicationState } from '../../store/index';
 import { PageResult } from '../../store/pagination/types';
-import { fetchPokemons } from '../../store/pokemons/action';
 import { Pokemon } from '../../store/pokemons/types';
-import Loading from '../items/Loading';
 import Pagination from '../items/Pagination';
 import PokemonList from '../items/PokemonList';
 import TopBar from '../items/TopBar';
@@ -24,13 +20,7 @@ interface PropsFromState {
 
 type Props = PropsFromState & PropsFromDispatch;
 
-const HomePage: React.FC<Props> = ({
-	darkMode,
-	pokemons,
-	loading,
-}) => {
-	if (loading) return <Loading />;
-
+const HomePage: React.FC<Props> = ({ pokemons, darkMode }) => {
 	return (
 		<div id='homepage-container' className={darkMode ? 'darkMode' : ''}>
 			<div className='content-wrapper'>
@@ -50,6 +40,5 @@ const mapStateToProps = ({ pokemons, darkMode }: ApplicationState) => {
 		errors: pokemons.errors,
 	};
 };
-
 
 export default connect(mapStateToProps, null)(HomePage);

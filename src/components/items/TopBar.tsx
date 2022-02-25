@@ -17,28 +17,28 @@ type Props = PropsFromState;
 const TopBar: React.FC<Props> = ({ page, pokemons, pokemonsLoaded }) => {
 	const dispatch = useDispatch();
 
-	// useEffect(() => {
-	// 	if (pokemons) {
-	// 		let sorted = localStorage.getItem('sort');
+	useEffect(() => {
+		if (pokemons) {
+			let sorted = localStorage.getItem('sort');
 
-	// 		if (sorted === 'az') {
-	// 			console.log('sorting b az');
-	// 			dispatch({
-	// 				type: PokemonActionTypes.SORT_ALPHABETICALLY,
-	// 			});
-	// 		} else if (sorted === 'height') {
-	// 			console.log('sorting b h');
-	// 			dispatch({
-	// 				type: PokemonActionTypes.SORT_BY_HEIGHT,
-	// 			});
-	// 		} else if (sorted === 'weight') {
-	// 			console.log('sorting b w');
-	// 			dispatch({
-	// 				type: PokemonActionTypes.SORT_BY_WEIGHT,
-	// 			});
-	// 		}
-	// 	}
-	// }, [pokemonsLoaded]);
+			if (sorted === 'az') {
+				console.log('sorting b az');
+				dispatch({
+					type: PokemonActionTypes.SORT_ALPHABETICALLY,
+				});
+			} else if (sorted === 'height') {
+				console.log('sorting b h');
+				dispatch({
+					type: PokemonActionTypes.SORT_BY_HEIGHT,
+				});
+			} else if (sorted === 'weight') {
+				console.log('sorting b w');
+				dispatch({
+					type: PokemonActionTypes.SORT_BY_WEIGHT,
+				});
+			}
+		}
+	}, [pokemonsLoaded]);
 
 	if(!pokemons) return null
 

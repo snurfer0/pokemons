@@ -7,6 +7,7 @@ import { fetchPage } from '../../store/pagination/action';
 import { fetchPokemons } from '../../store/pokemons/action';
 import { Page, PageResult } from '../../store/pagination/types';
 import DarkModeToggler from './DarkModeToggler';
+import Loading from '../items/Loading'
 
 interface PropsFromDispatch {
 	fetchPage: (limit: number, offset: number) => any;

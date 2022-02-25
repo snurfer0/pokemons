@@ -15,7 +15,7 @@ const PokemonItem: React.FC<Props> = ({ pokemon }) => {
 	
 	return (
 		<div className='pokemon-container'>
-			<div className='pokemon'>
+			<div className='pokemon-list-item'>
 				<img src={pokemon.sprites.front_shiny} alt='pokemon' />
 				<div className='name'>{pokemon.name}</div>
 				<div className='props-container'>

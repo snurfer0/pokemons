@@ -10,21 +10,29 @@ $text-color: #797171;
 
 * {
 	font-family: 'Sofia Rough Black Three', sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+#root {
+	min-height: 100%;
 }
 
 #homepage-container {
-	width: 100%;
 	display: flex;
 	justify-content: center;
 }
 
-body {
-	margin: 0px;
-}
 
+@import './variables';
+@import './loading';
 @import './topBar';
-@import './pagination';
-@import './pokemonList';
-@import './pokemonDetail';
 @import './darkModeToggler';
+@import './pagination';
+@import './pokemonDetail';
+@import './pokemonList';
 @import './darkMode';
